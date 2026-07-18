@@ -28,7 +28,7 @@ async def main():
 
             await client(
                 UpdateProfileRequest(
-                    first_name=f"{BASE_NAME}{now}"
+                    first_name=f"{BASE_NAME} {now}"
                 )
             )
 
