@@ -17,7 +17,7 @@ client = TelegramClient(
     api_hash
 )
 
-BASE_NAME = "Mr Dexta"
+BASE_NAME = "𝘿𝙚𝙭𝙩𝙖"
 
 async def main():
     await client.start()
@@ -30,7 +30,7 @@ async def main():
 
             await client(
                 UpdateProfileRequest(
-                    first_name=f"{BASE_NAME} 🕒 {iran_time}"
+                    first_name=f"{BASE_NAME} {iran_time}"
                 )
             )
 
