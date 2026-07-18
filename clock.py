@@ -4,40 +4,41 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from telethon import TelegramClient
+from telethon.sessions import StringSession
 from telethon.tl.functions.account import UpdateProfileRequest
 
-# Railway Variables
 api_id = int(os.environ["API_ID"])
 api_hash = os.environ["API_HASH"]
+string_session = os.environ["STRING_SESSION"]
 
-# اسم شما
-BASE_NAME = "𝘿𝙚𝙭𝙩𝙖"
+client = TelegramClient(
+    StringSession(string_session),
+    api_id,
+    api_hash
+)
 
-# ساخت سشن
-client = TelegramClient("clock_session", api_id, api_hash)
+BASE_NAME = "Mr Dexta"
 
 async def main():
     await client.start()
 
-    print("Clock Started...")
-
     while True:
         try:
-            # ساعت ایران
-            now = datetime.now(ZoneInfo("Asia/Tehran")).strftime("%H:%M")
+            iran_time = datetime.now(
+                ZoneInfo("Asia/Tehran")
+            ).strftime("%H:%M")
 
             await client(
                 UpdateProfileRequest(
-                    first_name=f"{BASE_NAME} {now}"
+                    first_name=f"{BASE_NAME} 🕒 {iran_time}"
                 )
             )
 
-            print(f"Updated: {now}")
+            print(iran_time)
 
         except Exception as e:
-            print("Error:", e)
+            print(e)
 
-        # هر ۶۰ ثانیه
         await asyncio.sleep(60)
 
 with client:
